@@ -1,0 +1,14 @@
+C:\Users\RRai\Riya's Workspace\ApiproxyNew\bin\Debug\net8.0\ApiproxyNew.exe
+C:\Users\RRai\Riya's Workspace\ApiproxyNew\bin\Debug\net8.0\ApiproxyNew.deps.json
+C:\Users\RRai\Riya's Workspace\ApiproxyNew\bin\Debug\net8.0\ApiproxyNew.runtimeconfig.json
+C:\Users\RRai\Riya's Workspace\ApiproxyNew\bin\Debug\net8.0\ApiproxyNew.dll
+C:\Users\RRai\Riya's Workspace\ApiproxyNew\bin\Debug\net8.0\ApiproxyNew.pdb
+C:\Users\RRai\Riya's Workspace\ApiproxyNew\obj\Debug\net8.0\ApiproxyNew.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\RRai\Riya's Workspace\ApiproxyNew\obj\Debug\net8.0\ApiproxyNew.AssemblyInfoInputs.cache
+C:\Users\RRai\Riya's Workspace\ApiproxyNew\obj\Debug\net8.0\ApiproxyNew.AssemblyInfo.cs
+C:\Users\RRai\Riya's Workspace\ApiproxyNew\obj\Debug\net8.0\ApiproxyNew.csproj.CoreCompileInputs.cache
+C:\Users\RRai\Riya's Workspace\ApiproxyNew\obj\Debug\net8.0\ApiproxyNew.dll
+C:\Users\RRai\Riya's Workspace\ApiproxyNew\obj\Debug\net8.0\refint\ApiproxyNew.dll
+C:\Users\RRai\Riya's Workspace\ApiproxyNew\obj\Debug\net8.0\ApiproxyNew.pdb
+C:\Users\RRai\Riya's Workspace\ApiproxyNew\obj\Debug\net8.0\ApiproxyNew.genruntimeconfig.cache
+C:\Users\RRai\Riya's Workspace\ApiproxyNew\obj\Debug\net8.0\ref\ApiproxyNew.dll
