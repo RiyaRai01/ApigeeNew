@@ -32,78 +32,78 @@ public class ProxyEndpoint
 	[XmlAttribute(AttributeName = "name")]
 	public string Name { get; set; }
 
-	public override string ToString()
-	{
-		StringBuilder sb = new StringBuilder();
-        System.Console.WriteLine("ProxyEndPoint");
-		sb.AppendLine($"Name: {Name}");
-		sb.AppendLine($"Description: {Description}");
+	// public override string ToString()
+	// {
+	// 	StringBuilder sb = new StringBuilder();
+    //     System.Console.WriteLine("ProxyEndPoint");
+	// 	sb.AppendLine($"Name: {Name}");
+	// 	sb.AppendLine($"Description: {Description}");
 
-		if (FaultRules != null)
-		{
-			sb.AppendLine("FaultRules:");
-			foreach (var faultRule in FaultRules)
-			{
-				sb.AppendLine($"FaltRule- {faultRule}");
-			}
-		}
+	// 	if (FaultRules != null)
+	// 	{
+	// 		sb.AppendLine("FaultRules:");
+	// 		foreach (var faultRule in FaultRules)
+	// 		{
+	// 			sb.AppendLine($"FaltRule- {faultRule}");
+	// 		}
+	// 	}
 
-		if (PreFlow != null)
-		{
-			sb.AppendLine("PreFlow:");
-			sb.AppendLine($"Name: {PreFlow.Name}");
-			// if (PreFlow.Request != null)
-			// {
-				sb.AppendLine("Request:");
-				foreach (var step in PreFlow.Request.Steps)
-				{
-					sb.AppendLine($"Step- {step.Name}");
-				}
-			// }
-			sb.AppendLine($"Response: {PreFlow.Response}");
-		}
+	// 	if (PreFlow != null)
+	// 	{
+	// 		sb.AppendLine("PreFlow:");
+	// 		sb.AppendLine($"Name: {PreFlow.Name}");
+	// 		// if (PreFlow.Request != null)
+	// 		// {
+	// 			sb.AppendLine("Request:");
+	// 			foreach (var step in PreFlow.Request.Steps)
+	// 			{
+	// 				sb.AppendLine($"Step- {step.Name}");
+	// 			}
+	// 		// }
+	// 		sb.AppendLine($"Response: {PreFlow.Response}");
+	// 	}
 
-		if (PostFlow != null)
-		{
-			sb.AppendLine($"PostFlow:");
-			sb.AppendLine($"Name: {PostFlow.Name}");
-			sb.AppendLine($"Request: {PostFlow.Request}");
-			sb.AppendLine($"Response: {PostFlow.Response}");
-		}
+	// 	if (PostFlow != null)
+	// 	{
+	// 		sb.AppendLine($"PostFlow:");
+	// 		sb.AppendLine($"Name: {PostFlow.Name}");
+	// 		sb.AppendLine($"Request: {PostFlow.Request}");
+	// 		sb.AppendLine($"Response: {PostFlow.Response}");
+	// 	}
 
-		if (Flows != null)
-		{
-			sb.AppendLine("Flows:");
-			foreach (var flow in Flows)
-			{
-				sb.AppendLine($"- {flow}");
-			}
-		}
+	// 	if (Flows != null)
+	// 	{
+	// 		sb.AppendLine("Flows:");
+	// 		foreach (var flow in Flows)
+	// 		{
+	// 			sb.AppendLine($"- {flow}");
+	// 		}
+	// 	}
 
-		if (HTTPProxyConnection != null)
-		{
-			sb.AppendLine("HTTPProxyConnection:");
-			sb.AppendLine($"BasePath: {HTTPProxyConnection.BasePath}");
-			if (HTTPProxyConnection.Properties != null)
-			{
-				sb.AppendLine("Properties:");
-				foreach (var property in HTTPProxyConnection.Properties)
-				{
-					sb.AppendLine($"Property -{property}");
-				}
-			}
-			sb.AppendLine($"VirtualHost: {HTTPProxyConnection.VirtualHost}");
-		}
+	// 	if (HTTPProxyConnection != null)
+	// 	{
+	// 		sb.AppendLine("HTTPProxyConnection:");
+	// 		sb.AppendLine($"BasePath: {HTTPProxyConnection.BasePath}");
+	// 		if (HTTPProxyConnection.Properties != null)
+	// 		{
+	// 			sb.AppendLine("Properties:");
+	// 			foreach (var property in HTTPProxyConnection.Properties)
+	// 			{
+	// 				sb.AppendLine($"Property -{property}");
+	// 			}
+	// 		}
+	// 		sb.AppendLine($"VirtualHost: {HTTPProxyConnection.VirtualHost}");
+	// 	}
 
-		if (RouteRule != null)
-		{
-			sb.AppendLine($"RouteRule: {RouteRule.Name}");
-			sb.AppendLine($"TargetEndPoint : {RouteRule.TargetEndpoint.Name}");
+	// 	if (RouteRule != null)
+	// 	{
+	// 		sb.AppendLine($"RouteRule: {RouteRule.Name}");
+	// 		sb.AppendLine($"TargetEndPoint : {RouteRule.TargetEndpoint.Name}");
 
-		}
+	// 	}
 
-		return sb.ToString();
-	}
+	// 	return sb.ToString();
+	// }
 
 
 }
@@ -126,7 +126,7 @@ public class PreFlow
 [XmlRoot(ElementName = "Step")]
 public class Step
 {
-	[XmlText]
+	[XmlElement(ElementName = "Name")]
 	public string Name { get; set; }
 }
 

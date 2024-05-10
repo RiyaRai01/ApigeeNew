@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "hCnyylhGDPKbpBVeEFV8vzfunPUb8W3/4Wt+yU3xKSyZtgB25fdpc9AwP1Bg2nVrPEOWFHqcXdRMb82q0wj0EA==",
+  "dgSpecHash": "V/W/xtG90fDtZBcr3i/9ZxDxwDqAN4Sv7cvdfbdH2J4DZssS5SkthVxIrzA+/rldzIeeJ4o/pj4muDz9ai8O8A==",
   "success": true,
   "projectFilePath": "C:\\Users\\RRai\\Riya's Workspace\\ApiproxyNew\\ApiproxyNew.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\RRai\\.nuget\\packages\\csvhelper\\32.0.2\\csvhelper.32.0.2.nupkg.sha512"
+  ],
   "logs": []
 }

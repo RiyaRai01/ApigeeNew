@@ -21,10 +21,10 @@ namespace Apigeemig
         public string Description { get; set; }
 
         [XmlElement(ElementName = "CreatedAt")]
-        public long CreatedAt { get; set; }
+        public long CreatedAt {get;set;}
 
         [XmlElement(ElementName = "LastModifiedAt")]
-        public long LastModifiedAt { get; set; }
+        public long LastModifiedAt {get;set;}
 
         [XmlElement(ElementName = "BasePaths")]
         public string BasePaths { get; set; }
@@ -57,38 +57,38 @@ namespace Apigeemig
             return DateTimeOffset.FromUnixTimeMilliseconds(LastModifiedAt).DateTime;
         }
 
-        public override string ToString()
-        {
-            string result = $"Name: {Name}\n";
-            result += $"Revision: {Revision}\n";
-            result += $"DisplayName: {DisplayName}\n";
-            result += $"Description: {Description}\n";
-            result += $"CreatedAt: {GetCreatedAtDateTime()}\n";
-            result += $"LastModifiedAt: {GetLastModifiedAtDateTime()}\n";
-            result += $"BasePaths: {BasePaths}\n";
-            result += $"--------------------------------\n";
-            result += "Policies:\n";
-            foreach (var policy in Policies)
-            {
-                result += $"Policy - {policy.Name}\n ";
-                result += policy.PolicyObject.ToString();
-            }
+        // public override string ToString()
+        // {
+        //     string result = $"Name: {Name}\n";
+        //     result += $"Revision: {Revision}\n";
+        //     result += $"DisplayName: {DisplayName}\n";
+        //     result += $"Description: {Description}\n";
+        //     result += $"CreatedAt: {GetCreatedAtDateTime()}\n";
+        //     result += $"LastModifiedAt: {GetLastModifiedAtDateTime()}\n";
+        //     result += $"BasePaths: {BasePaths}\n";
+        //     result += $"--------------------------------\n";
+        //     result += "Policies:\n";
+        //     foreach (var policy in Policies)
+        //     {
+        //         result += $"Policy - {policy.Name}\n ";
+        //         result += policy.PolicyObject.ToString();
+        //     }
 
-            result += "ProxyEndpoints:\n";
-            foreach (var endpoint in ProxyEndpoints)
-            {
-                result += $"- {endpoint.Name}\n";
-                result += endpoint.ProxyEndPointObject.ToString();
-            }
+        //     result += "ProxyEndpoints:\n";
+        //     foreach (var endpoint in ProxyEndpoints)
+        //     {
+        //         result += $"- {endpoint.Name}\n";
+        //         result += endpoint.ProxyEndPointObject.ToString();
+        //     }
 
-            result += "TargetEndpoints:\n";
-            foreach (var endpoint in TargetEndpoints)
-            {
-                result += $"- {endpoint.Name}\n";
-                result += endpoint.TargetEndpointObject.ToString();
-            }
-            return result;
-        }
+        //     result += "TargetEndpoints:\n";
+        //     foreach (var endpoint in TargetEndpoints)
+        //     {
+        //         result += $"- {endpoint.Name}\n";
+        //         result += endpoint.TargetEndpointObject.ToString();
+        //     }
+        //     return result;
+        // }
     }
 
 

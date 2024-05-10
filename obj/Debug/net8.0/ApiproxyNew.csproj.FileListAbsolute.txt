@@ -12,3 +12,7 @@ C:\Users\RRai\Riya's Workspace\ApiproxyNew\obj\Debug\net8.0\refint\ApiproxyNew.d
 C:\Users\RRai\Riya's Workspace\ApiproxyNew\obj\Debug\net8.0\ApiproxyNew.pdb
 C:\Users\RRai\Riya's Workspace\ApiproxyNew\obj\Debug\net8.0\ApiproxyNew.genruntimeconfig.cache
 C:\Users\RRai\Riya's Workspace\ApiproxyNew\obj\Debug\net8.0\ref\ApiproxyNew.dll
+C:\Users\RRai\Riya's Workspace\ApiproxyNew\obj\Debug\net8.0\ApiproxyNew.sourcelink.json
+c:\Users\RRai\Riya's Workspace\ApiproxyNew\bin\Debug\net8.0\CsvHelper.dll
+c:\Users\RRai\Riya's Workspace\ApiproxyNew\obj\Debug\net8.0\ApiproxyNew.csproj.AssemblyReference.cache
+C:\Users\RRai\Riya's Workspace\ApiproxyNew\obj\Debug\net8.0\Apiproxy.15E964DC.Up2Date

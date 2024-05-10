@@ -6,7 +6,10 @@ using Apigeemig;
 using Proxy.Endpoint;
 using Proxy.Policies;
 using Proxy.Target;
-
+using CsvHelper;
+using System.Globalization;
+using System.Text;
+using System.Reflection;
 class Program
 {
     public static Dictionary<string, object> DeserializedObjectList = new Dictionary<string, object>();
@@ -14,41 +17,117 @@ class Program
     {
         string rootDirectory = @"C:\Users\RRai\Downloads\apigeemig_rev2_2024_03_12\apiproxy";
 
-        var apigeeType = new List<Type> {typeof(ApiProxy)};
-        var policyTypes = new List<Type> { typeof(ServiceCallout), typeof(SpikeArrest), typeof(VerifyAPIKey)};
-        var targetTypes = new List<Type> { typeof(TargetEndpoint)}; 
-        var proxyTypes = new List<Type> {typeof(ProxyEndpoint)};
+        var apigeeType = new List<Type> { typeof(ApiProxy) };
+        var policyTypes = new List<Type> { typeof(ServiceCallout), typeof(SpikeArrest), typeof(VerifyAPIKey) };
+        var targetTypes = new List<Type> { typeof(TargetEndpoint) };
+        var proxyTypes = new List<Type> { typeof(ProxyEndpoint) };
 
         DeserializePolicies(rootDirectory, policyTypes);
         DeserializeTargetEndpoints(rootDirectory, targetTypes);
         DeserializeProxyEndpoints(rootDirectory, proxyTypes);
-        
-        var apigee = BuildApigee(rootDirectory, apigeeType);
-        System.Console.WriteLine( apigee.ToString());
 
+        var apigee = BuildApigee(rootDirectory, apigeeType);
+        // System.Console.WriteLine(apigee.GetType() is object);
+        // System.Console.WriteLine( apigee.ToString());
+        // string csvString = WriteObjectsToCsv(apigee);
+
+        WriteObjectsToCsv(apigee);
+
+    }
+
+    public static void WriteObjectsToCsv(object Obj)
+    {
+        // T obj = Deserialize<T>(xmlpath);
+
+        // System.Console.WriteLine(Obj.GetType() == typeof(object));
+
+        var properties = Obj.GetType().GetProperties();
+
+        StringBuilder csvContent = new StringBuilder();
+
+        //Append header
+        csvContent.AppendLine(GetCsvHeader(properties));
+
+        // Get values of properties
+        var values = GetPropertyValues(properties, Obj);
+
+        // Append values to CSV content
+        csvContent.AppendLine(string.Join(",", values));
+
+        System.Console.WriteLine(csvContent);
+
+        // Write content to file
+        // File.WriteAllText(outputfilePath, csvContent.ToString());
+    }
+
+    private static string GetCsvHeader(PropertyInfo[] properties)
+    {
+        List<string> header = new List<string>();
+        foreach (var property in properties)
+        {
+            if (property.PropertyType.IsPrimitive || property.PropertyType == typeof(string) || property.PropertyType == typeof(object))
+            {
+                header.Add(property.Name);
+            }
+            else
+            {
+                var subObjectProperties = property.PropertyType.GetProperties();
+                header.AddRange(subObjectProperties.Select(subProperty => $"{property.Name}.{subProperty.Name}"));
+            }
+        }
+        return string.Join(",", header);
+    }
+
+    private static IEnumerable<object> GetPropertyValues(PropertyInfo[] properties, object obj)
+    {
+        List<object> values = new List<object>();
+        foreach (var property in properties)
+        {
+            var value = property.GetValue(obj);
+
+
+            if (value != null)
+            {
+                if (property.PropertyType.IsPrimitive || property.PropertyType == typeof(string) || property.PropertyType == typeof(object))
+                {
+                    values.Add(value);
+                }
+                else
+                {
+                    var subObjectProperties = property.PropertyType.GetProperties();
+                    values.AddRange(GetPropertyValues(subObjectProperties, value));
+                }
+            }
+            else
+            {
+                values.Add(""); // If the property is null, add an empty string to maintain CSV structure
+            }
+        }
+
+        return values;
     }
 
     private static ApiProxy BuildApigee(string FilePath, List<Type> Types)
     {
         var apigee = DeserializeApigee(FilePath, Types);
 
-        foreach(var policyInfo in apigee.Policies)
+        foreach (var policyInfo in apigee.Policies)
         {
             policyInfo.PolicyObject = DeserializedObjectList[policyInfo.Name];
         }
 
-        foreach(var targetEndpointInfo in apigee.TargetEndpoints)
+        foreach (var targetEndpointInfo in apigee.TargetEndpoints)
         {
             targetEndpointInfo.TargetEndpointObject = DeserializedObjectList[targetEndpointInfo.Name];
         }
 
-        foreach(var proxyEndpointInfo in apigee.ProxyEndpoints)
+        foreach (var proxyEndpointInfo in apigee.ProxyEndpoints)
         {
             proxyEndpointInfo.ProxyEndPointObject = DeserializedObjectList[proxyEndpointInfo.Name];
         }
 
         return apigee;
-        
+
     }
 
     private static ApiProxy DeserializeApigee(string filePath, List<Type> apigeeType)
@@ -71,9 +150,9 @@ class Program
 
             return null;
         }
-         catch (Exception ex)
+        catch (Exception ex)
         {
-            Console.WriteLine($"Error deserializing apigee: {ex.Message}");
+            // Console.WriteLine($"Error deserializing apigee: {ex.Message}");
             return null;
         }
     }
@@ -81,7 +160,7 @@ class Program
     private static void DeserializeProxyEndpoints(string rootDirectory, List<Type> proxyTypes)
     {
 
-         try
+        try
         {
             // Search for XML files in the policies directory
             string proxyDirectory = Path.Combine(rootDirectory, "proxies");
@@ -100,7 +179,7 @@ class Program
 
                     // policies.Add(policy);
 
-                    var name = GetProxyName((ProxyEndpoint)proxy); 
+                    var name = GetProxyName((ProxyEndpoint)proxy);
 
                     DeserializedObjectList[name] = proxy;
 
@@ -109,15 +188,15 @@ class Program
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error deserializing policies: {ex.Message}");
+            // Console.WriteLine($"Error deserializing policies: {ex.Message}");
             throw;
         }
-        
+
     }
 
     private static string GetProxyName(ProxyEndpoint proxy)
     {
-      return proxy.Name; 
+        return proxy.Name;
     }
 
     private static void DeserializeTargetEndpoints(string rootDirectory, List<Type> targetTypes)
@@ -141,7 +220,7 @@ class Program
 
                     // policies.Add(policy);
 
-                    var name = GetTargetName((TargetEndpoint)target); 
+                    var name = GetTargetName((TargetEndpoint)target);
 
                     DeserializedObjectList[name] = target;
 
@@ -150,7 +229,7 @@ class Program
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error deserializing policies: {ex.Message}");
+            // Console.WriteLine($"Error deserializing policies: {ex.Message}");
             throw;
         }
     }
@@ -181,7 +260,7 @@ class Program
 
                     // policies.Add(policy);
 
-                    var name = GetPolicyName((Policy)policy); 
+                    var name = GetPolicyName((Policy)policy);
 
                     DeserializedObjectList[name] = policy;
 
@@ -190,7 +269,7 @@ class Program
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error deserializing policies: {ex.Message}");
+            // Console.WriteLine($"Error deserializing policies: {ex.Message}");
             throw;
         }
 
@@ -213,7 +292,7 @@ class Program
             catch (Exception ex)
             {
                 // Log the error (optional)
-                Console.WriteLine($"Error deserializing '{filePath}' as '{type.Name}': {ex.Message}");
+                // Console.WriteLine($"Error deserializing '{filePath}' as '{type.Name}': {ex.Message}");
             }
         }
 
@@ -222,7 +301,7 @@ class Program
     }
 
 
-     public static object DeserializeXmlFile(string filePath, Type objectType)
+    public static object DeserializeXmlFile(string filePath, Type objectType)
     {
         object result;
 
@@ -236,6 +315,7 @@ class Program
             {
                 result = serializer.Deserialize(fileStream);
             }
+            return result;
         }
         catch (Exception ex)
         {
@@ -243,7 +323,7 @@ class Program
             throw new Exception($"Error deserializing '{filePath}' as '{objectType.Name}': {ex.Message}");
         }
 
-        return result;
+
     }
 
     public static string ObjectToString<T>(T obj)
